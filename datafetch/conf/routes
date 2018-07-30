@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+#GET            /                                                      controllers.Application.index()
+
+# Map static resources from the /public folder to the /assets URL path
+GET            /assets/*file                                          controllers.Assets.at(path="/public", file)
+GET            /api/entity/talkers/:entity_id                         controllers.Application.getTalkers(entity_id: Integer, start_time: String ?= "19700101000000", end_time: String ?= "20380119000000", tk, tk_sec, gran)
+GET            /api/entity/mostretweeted/:entity_id/:count            controllers.Application.getMostRetweetedTweets(entity_id: Integer, start_time: String ?= "19700101000000", end_time: String ?= "20380119000000", count: Integer, tk, tk_sec)
+GET            /api/entity/relevant_hashtags/:entity_id/:count        controllers.Application.getHashtags(entity_id: Integer, start_time: String ?= "19700101000000", end_time: String ?= "20380119000000", count: Integer, tk, tk_sec)
+GET            /api/entity/relevant_topics/:entity_id/:count          controllers.Application.getRelevantTopics(entity_id: Integer,count: Integer)
+GET            /api/entity/followers/:entity_id                       controllers.Application.getFollowers(entity_id: Integer, start_time: String ?= "19700101000000", end_time: String ?= "20380119000000", tk, tk_sec, gran)
+GET            /api/entity/geo_distribution/:entity_id                controllers.Application.getGeoDistribution(entity_id: Integer, start_time: String ?= "19700101000000", end_time: String ?= "20380119000000", tk, tk_sec)
+GET            /api/entity/sentiment/:entity_id                       controllers.Application.getSentiment(entity_id: Integer, start_time: String ?= "19700101000000", end_time: String ?= "20380119000000", tk, tk_sec, gran)
+GET            /api/entities                                          controllers.Application.getAllEntities(tk, tk_sec)
+GET            /api/entity/:entity_id                                 controllers.Application.getEntity(entity_id: Integer, tk, tk_sec)
+DELETE         /api/entity/:entity_id/:tk/:tk_sec                     controllers.Application.deleteEntity(entity_id: Integer, tk, tk_sec)
+POST           /api/entity/:tk/:tk_sec                                controllers.Application.addEntity(tk, tk_sec)
+OPTIONS        /*url                                                  controllers.Application.options(url: String)

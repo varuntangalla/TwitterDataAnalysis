@@ -1,0 +1,12 @@
+<h3 ng-if="tweets.length <= 0">Not enough data.</h3>
+
+<div ng-if="tweets.length >= 1" style="overflow-y: auto; height: 300px">
+    <ol>
+        <li ng-repeat="tweet in tweets" class="list-unstyled">
+            <blockquote>
+                <p>{{tweet.text}}</p>
+                <footer><strong>@{{tweet.screenName}}</strong> <a title="View tweet on Twitter" href="https://twitter.com/{{tweet.screenName}}/status/{{tweet.tweetId}}">{{tweet.createdAt | epochToISO}}</a> (Retweeted {{tweet.retweetCount}} times)</footer>
+            </blockquote>
+        </li>
+    </ol>
+</div>

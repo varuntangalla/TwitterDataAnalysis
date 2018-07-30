@@ -1,0 +1,214 @@
+@(name: String)(accessTokenJson: String)
+
+@content = {
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+        var accessToken = @Html(accessTokenJson);
+        var googleVisualization;
+        google.load("visualization", "1", {packages: ["geochart"], callback: function() {googleVisualization = google.visualization;}});
+    </script>
+
+    <div ng-app="home">
+        <div class="container-fluid">
+            <div class="page-header">
+                <h1>@name <span class="pull-right"><a href="/signout" role="button" class="btn btn-warning"><i class="fa fa-sign-out"></i> Sign Out</a></span></h1>
+            </div>
+
+            <ul class="hidden nav nav-tabs" role="tablist" id="maintabs">
+                <li class="active"><a id="entities-tab-selector" data-target="#entities-tab" role="tab" data-toggle="tab"></a></li>
+                <li><a id="stats-tab-selector" data-target="#stats-tab" role="tab" data-toggle="tab"></a></li>
+            </ul>
+
+            <div class="tab-content" ng-controller="entitiesCtrl as entities">
+                <div id="entities-tab" class="tab-pane fade in active">
+                    <div class="lead">
+                        <p ng-if="entities.entitiesList.length">Welcome <strong>@@{{entities.accessToken.screenName}}</strong>! Select an entity to view its stats.</p>
+                        <p ng-if="!entities.entitiesList.length">Welcome <strong>@@{{entities.accessToken.screenName}}</strong>! You don't have any entities. Add one to get started.</p>
+                    </div>
+
+                    <div class="row">
+                        <div ng-repeat="entity in entities.entitiesList">
+                            <tw-entity entity="entity" display="entities.showEntity(entity.id)"></tw-entity>
+                            <button id="hidden-entity-delete-button-{{entity.id}}" class="hidden" ng-click="entities.deleteEntity(entity.id)"></button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline btn-default btn-lg" data-toggle="modal" data-target="#entity-form-modal"><i class="fa fa-plus"></i> Add an entity</button>
+
+                    <div class="row"><br></div>
+
+                    <div class="modal" id="entity-form-modal" tabindex="-1" role="dialog" aria-labelledby="entity-form-modal-label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form role="form" id="entity-form" ng-submit="entities.addEntity()">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="entity-form-modal-label">Add an entity</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="entity-form-input-name">Name</label>
+                                            <input type="text" class="form-control" id="entity-form-input-name" ng-model="entities.formInput.name">
+                                            <span id="entity-form-input-name-help" class="help-block hidden">Enter a name for the new entity!</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="entity-form-input-handles">Handles (space separated)</label>
+                                            <input type="text" id="entity-form-input-handles" class="tag-it form-control" ng-model="entities.formInput.handles">
+                                            <span id="entity-form-input-handles-help" class="help-block hidden">Add at least one handle!</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="entity-form-input-keywords">Keywords (space separated)</label>
+                                            <input type="text" id="entity-form-input-keywords" class="tag-it form-control" ng-model="entities.formInput.keywords">
+                                            <span id="entity-form-input-keywords-help" class="help-block hidden">Add at least one keyword!</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                                        <button type="submit" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stats-tab" class="tab-pane fade">
+                    <p class="lead">
+                        <span ng-if="entities.comparing">These are the stats for <strong>{{entities.shownEntity.name}}</strong> compared with <strong>{{entities.comparedEntity.name}}.</strong></span>
+                        <span ng-if="!entities.comparing">These are the stats for <strong>{{entities.shownEntity.name}}</strong>.</span>
+                    </p>
+
+                    <div>
+                        <button type="button" class="btn btn-default" ng-click="entities.showEntities()">Go Back</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span>Compare {{entities.shownEntity.name}} with </span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ng-click="entities.compareWith(-1)">Nothing</a></li>
+                                <li ng-repeat="entity in entities.entitiesList"><a ng-click="entities.compareWith(entity.id)">{{entity.name}}</a></li>
+                            </ul>
+                        </div>
+                    </div><br>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" href="#most-retweeted-collapse">Most Retweeted</a></h4>
+                            </div>
+                            <div id="most-retweeted-collapse" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <tw-stat-compare stat="mostRetweeted" entity1="entities.shownEntity" entity2="entities.comparedEntity"></tw-stat-compare>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" href="#relevant-topics-collapse">Relevant Topics</a></h4>
+                            </div>
+                            <div id="relevant-topics-collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <tw-stat-compare stat="relevantTopics" entity1="entities.shownEntity" entity2="entities.comparedEntity"></tw-stat-compare>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" href="#relevant-hashtags-collapse">Relevant Hashtags</a></h4>
+                            </div>
+                            <div id="relevant-hashtags-collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <tw-stat-compare stat="relevantHashtags" entity1="entities.shownEntity" entity2="entities.comparedEntity"></tw-stat-compare>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" href="#followers-collapse">Followers</a></h4>
+                            </div>
+                            <div id="followers-collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <tw-stat-compare stat="followers" entity1="entities.shownEntity" entity2="entities.comparedEntity"></tw-stat-compare>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" href="#talkers-collapse">People Talking</a></h4>
+                            </div>
+                            <div id="talkers-collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <tw-stat-compare stat="talkers" entity1="entities.shownEntity" entity2="entities.comparedEntity"></tw-stat-compare>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" href="#sentiment-collapse">Sentiment</a></h4>
+                            </div>
+                            <div id="sentiment-collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <tw-stat-compare stat="sentiment" entity1="entities.shownEntity" entity2="entities.comparedEntity"></tw-stat-compare>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" href="#geo-distribution-collapse">Location</a></h4>
+                            </div>
+                            <div id="geo-distribution-collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <tw-stat-compare stat="geoDistribution" entity1="entities.shownEntity" entity2="entities.comparedEntity"></tw-stat-compare>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@main(name)(content)(List(
+    "https://cdn.jsdelivr.net/npm/morris.js@0.5.0/morris.css",
+    "/assets/stylesheets/lib/tagit/jquery.tagit.min.css",
+    "/assets/stylesheets/lib/tagit/tagit.ui-zendesk.min.css",
+    "/assets/stylesheets/lib/sb_admin_2.min.css",
+    "/assets/stylesheets/lib/jqcloud.min.css",
+    "/assets/stylesheets/home.css"
+))(List(
+    "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js",
+    "https://cdn.jsdelivr.net/npm/morris.js@0.5.0/morris.js",
+    "/assets/javascripts/lib/bootbox.min.js",
+    "/assets/javascripts/lib/tag-it.min.js",
+    "/assets/javascripts/lib/sb_admin_2.min.js",
+    "/assets/javascripts/lib/jqcloud.min.js",
+    "/assets/javascripts/home.js",
+    "/assets/javascripts/app/home/controllers/entities.js",
+    "/assets/javascripts/app/home/directives/statcompare/statcompare.js",
+    "/assets/javascripts/app/home/directives/entity/entity.js",
+    "/assets/javascripts/app/home/directives/wordcloud/wordcloud.js",
+    "/assets/javascripts/app/home/directives/tweets/tweets.js",
+    "/assets/javascripts/app/home/directives/chart/chart.js",
+    "/assets/javascripts/app/home/filters/epochToISO.js"
+))

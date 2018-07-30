@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/datafetch/.idea/modules/datafetch.iml" filepath="$PROJECT_DIR$/datafetch/.idea/modules/datafetch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/datafetch/.idea/modules/datafetch-build.iml" filepath="$PROJECT_DIR$/datafetch/.idea/modules/datafetch-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/twitter-sentiment-analysis.iml" filepath="$PROJECT_DIR$/.idea/twitter-sentiment-analysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webapp/.idea/modules/webapp.iml" filepath="$PROJECT_DIR$/webapp/.idea/modules/webapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webapp/.idea/modules/webapp-build.iml" filepath="$PROJECT_DIR$/webapp/.idea/modules/webapp-build.iml" />
+    </modules>
+  </component>
+</project>

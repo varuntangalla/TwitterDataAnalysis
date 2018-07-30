@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Play2ExcludedModulesSettings">
+    <option name="INFO">
+      <map>
+        <entry key="StudentDemo">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="playDistrPath" value="$USER_HOME$/.ivy2/cache/com.typesafe.play/play_2.10/jars/play_2.10-2.2.6.jar" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="datafetch">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="version" value="2.2.6" />
+              <option name="sourceDir" value="$PROJECT_DIR$/datafetch/app" />
+              <option name="confDir" value="$PROJECT_DIR$/datafetch/conf" />
+              <option name="routesImports">
+                <list>
+                  <option value="play.libs.F" />
+                </list>
+              </option>
+              <option name="uri" value="$PROJECT_DIR$/datafetch" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+        <entry key="webapp">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="version" value="2.2.6" />
+              <option name="sourceDir" value="$PROJECT_DIR$/webapp/conf" />
+              <option name="confDir" value="$PROJECT_DIR$/webapp/app" />
+              <option name="uri" value="$PROJECT_DIR$/webapp" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

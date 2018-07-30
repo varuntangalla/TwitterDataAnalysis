@@ -1,0 +1,23 @@
+body {
+    background-color: #fff;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.panel-primary a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}

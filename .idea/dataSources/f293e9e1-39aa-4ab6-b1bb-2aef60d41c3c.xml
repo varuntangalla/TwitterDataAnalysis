@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="twitter@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="twitter">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="bloodhound"/>
+    <schema id="4" parent="1" name="feedback"/>
+    <schema id="5" parent="1" name="gatexcel"/>
+    <schema id="6" parent="1" name="information_schema"/>
+    <schema id="7" parent="1" name="mysql"/>
+    <schema id="8" parent="1" name="performance_schema"/>
+    <schema id="9" parent="1" name="sys"/>
+    <schema id="10" parent="1" name="twitter_dummy"/>
+    <table id="11" parent="2" name="entity"/>
+    <table id="12" parent="2" name="followers"/>
+    <table id="13" parent="2" name="geography"/>
+    <table id="14" parent="2" name="handle"/>
+    <table id="15" parent="2" name="hashtag_counter"/>
+    <table id="16" parent="2" name="keyword"/>
+    <table id="17" parent="2" name="play_evolutions"/>
+    <table id="18" parent="2" name="sentiment"/>
+    <table id="19" parent="2" name="talkers"/>
+    <table id="20" parent="2" name="token"/>
+    <table id="21" parent="2" name="topics"/>
+    <table id="22" parent="2" name="tweets"/>
+    <column id="23" parent="11" name="entity_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="11" name="entity_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="25" parent="11" name="user_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="26" parent="11" name="ix_entity_token_1">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="27" parent="11" name="PRIMARY">
+      <ColNames>entity_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="28" parent="11" name="fk_entity_token_1">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>twitter</RefSchemaName>
+      <RefTableName>token</RefTableName>
+      <RefColNames>user_id</RefColNames>
+    </foreign-key>
+    <column id="29" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="30" parent="12" name="screen_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="31" parent="12" name="time">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="32" parent="12" name="count">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="33" parent="12" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="13" name="entity_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="36" parent="13" name="created_at">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="37" parent="13" name="latitude">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="38" parent="13" name="longitude">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="39" parent="13" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="40" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="41" parent="14" name="handle">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="42" parent="14" name="entity_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="43" parent="14" name="ix_handle_entity_2">
+      <ColNames>entity_id</ColNames>
+    </index>
+    <key id="44" parent="14" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="45" parent="14" name="fk_handle_entity_2">
+      <ColNames>entity_id</ColNames>
+      <RefSchemaName>twitter</RefSchemaName>
+      <RefTableName>entity</RefTableName>
+      <RefColNames>entity_id</RefColNames>
+    </foreign-key>
+    <column id="46" parent="15" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="47" parent="15" name="hashtag">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="48" parent="15" name="entity_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="49" parent="15" name="created_at">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="50" parent="15" name="count">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <key id="51" parent="15" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="52" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="53" parent="16" name="keyword">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="54" parent="16" name="entity_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="55" parent="16" name="ix_keyword_entity_3">
+      <ColNames>entity_id</ColNames>
+    </index>
+    <key id="56" parent="16" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="57" parent="16" name="fk_keyword_entity_3">
+      <ColNames>entity_id</ColNames>
+      <RefSchemaName>twitter</RefSchemaName>
+      <RefTableName>entity</RefTableName>
+      <RefColNames>entity_id</RefColNames>
+    </foreign-key>
+    <column id="58" parent="17" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="17" name="hash">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="17" name="applied_at">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="61" parent="17" name="apply_script">
+      <Position>4</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="62" parent="17" name="revert_script">
+      <Position>5</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="63" parent="17" name="state">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="64" parent="17" name="last_problem">
+      <Position>7</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <key id="65" parent="17" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="66" parent="18" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="67" parent="18" name="time">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="68" parent="18" name="entity_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="69" parent="18" name="score">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="70" parent="18" name="count">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="71" parent="18" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="72" parent="19" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="73" parent="19" name="entity_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="74" parent="19" name="mention_time">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="75" parent="19" name="count">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <key id="76" parent="19" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="77" parent="20" name="user_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="78" parent="20" name="access_token">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="79" parent="20" name="access_token_secret">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="80" parent="20" name="PRIMARY">
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="81" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="82" parent="21" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="83" parent="21" name="entity_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="84" parent="21" name="created_at">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="85" parent="21" name="count">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <key id="86" parent="21" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="87" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="88" parent="22" name="tweet_id">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="89" parent="22" name="entity_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="90" parent="22" name="text">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="91" parent="22" name="retweet_count">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="92" parent="22" name="created_at">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="93" parent="22" name="screen_name">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="94" parent="22" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

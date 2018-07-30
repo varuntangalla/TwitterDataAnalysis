@@ -1,0 +1,40 @@
+<div class=row" ng-if="stat == 'mostRetweeted'">
+    <tw-tweets class="shown-entity col-md-12" tweets="entity1.mostRetweeted"></tw-tweets>
+    <tw-tweets class="compared-entity col-md-6" tweets="entity2.mostRetweeted"></tw-tweets>
+</div>
+
+<div class=row" ng-if="stat == 'relevantTopics'">
+    <tw-word-cloud cloud-id="shown-entity-relevant-topics-cloud" class="shown-entity" words="entity1.relevantTopics" type="topic"></tw-word-cloud>
+    <tw-word-cloud cloud-id="compared-entity-relevant-topics-cloud" class="compared-entity" words="entity2.relevantTopics" type="topic"></tw-word-cloud>
+</div>
+
+<div class=row" ng-if="stat == 'relevantHashtags'">
+    <tw-word-cloud cloud-id="shown-entity-relevant-hashtags-cloud" class="shown-entity" words="entity1.relevantHashtags" type="hashtag"></tw-word-cloud>
+    <tw-word-cloud cloud-id="compared-entity-relevant-hashtags-cloud" class="compared-entity" words="entity2.relevantHashtags" type="hashtag"></tw-word-cloud>
+</div>
+
+<div class=row" ng-if="stat == 'followers'">
+    <tw-chart chart-id="shown-entity-followers" class="shown-entity col-md-12" data="entity1.followers" type="line" height="250px"
+              xkey="time" ykey="followers" label="Followers"></tw-chart>
+    <tw-chart chart-id="compared-entity-followers" class="compared-entity col-md-6" data="entity2.followers" type="line" height="250px"
+              xkey="time" ykey="followers" label="Followers"></tw-chart>
+</div>
+
+<div class=row" ng-if="stat == 'talkers'">
+    <tw-chart chart-id="shown-entity-talkers" class="shown-entity col-md-12" data="entity1.talkers" type="line" height="250px"
+              xkey="time" ykey="count" label="People"></tw-chart>
+    <tw-chart chart-id="compared-entity-talkers" class="compared-entity col-md-6" data="entity2.talkers" type="line" height="250px"
+              xkey="time" ykey="count" label="People"></tw-chart>
+</div>
+
+<div class=row" ng-if="stat == 'sentiment'">
+    <tw-chart chart-id="shown-entity-sentiment" class="shown-entity col-md-12" data="entity1.sentiment" type="line" height="250px"
+              xkey="time" ykey="score" label="Sentiment Score"></tw-chart>
+    <tw-chart chart-id="compared-entity-sentiment" class="compared-entity col-md-6" data="entity2.sentiment" type="line" height="250px"
+              xkey="time" ykey="score" label="Sentiment Score"></tw-chart>
+</div>
+
+<div class=row" ng-if="stat == 'geoDistribution'">
+    <tw-chart chart-id="shown-entity-geo-distribution" class="shown-entity col-md-12" data="entity1.geoDistribution" type="geo" height="500px"></tw-chart>
+    <tw-chart chart-id="compared-entity-geo-distribution" class="compared-entity col-md-6" data="entity2.geoDistribution" type="geo" height="500px"></tw-chart>
+</div>

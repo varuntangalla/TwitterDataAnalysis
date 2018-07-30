@@ -1,0 +1,17 @@
+Step 1 : Execute the following command to add the APT repository to your /etc/apt/sources.list.d:
+
+        $echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+
+Step 2: To avoid warnings about unsigned packages, add our public key to your trusted key list using apt-key(8):
+
+        $wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
+
+Step 3: Run the following command to update the package list:
+
+        $sudo apt-get update
+
+Step 4 : Install rabbitmq-server package
+
+         $sudo apt-get install rabbitmq-server
+Step 5: Enable Rabbitmq ui plugin
+         $sudo rabbitmq-plugins enable rabbitmq_management

@@ -1,0 +1,30 @@
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="truncate">
+                <span class="pull-right"><a data-toggle="modal" data-target="#entity-confirm-delete-modal-{{entity.id}}"><i class="fa fa-2x fa-trash delete-icon"></i></a></span>
+                <span class="huge"><a ng-click="display()">{{entity.name}}</a></span>
+            </div>
+            <ul class="list-inline truncate">
+                <li ng-repeat="handle in entity.handles">{{handle}}</li>
+            </ul>
+            <ul class="list-inline truncate">
+                <li ng-repeat="keyword in entity.keywords">{{keyword}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="entity-confirm-delete-modal-{{entity.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Are you sure you want to delete entity <strong>{{entity.name}}</strong>? (This cannot be undone)</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-circle" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-danger btn-circle" entity-id="{{entity.id}}" onclick="doEntityDelete($(this).attr('entity-id'))"><i class="fa fa-check"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

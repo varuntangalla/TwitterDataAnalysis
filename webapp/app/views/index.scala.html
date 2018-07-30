@@ -1,0 +1,46 @@
+@(name: String)
+
+@content = {
+    <div ng-app="index">
+        <header>
+            <div class="container-fluid intro-text">
+                <div class="intro-lead-in">@name</div>
+                <div class="intro-heading">Twitter Sentiment Analysis Tool</div>
+                <div class="row">
+                    <div ng-controller="signInCtrl as signIn" class="col-md-4 col-md-offset-4">
+                        <div ng-show="signIn.hasError" class="alert alert-danger" role="alert"><strong>Error!</strong>Couldn't connect to Twitter. Please try again.</div>
+                        <button type="button" ng-click="signIn.doSignIn()" class="btn btn-xl" ng-bind-html="signIn.placeholderMessage"></button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="services">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Features</h2>
+                        <h3 class="section-subheading text-muted">What can @name do for you?</h3>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <tw-feature icon="fa-eye" heading="Track">Track what users are saying about your products on Twitter.</tw-feature>
+                    <tw-feature icon="fa-line-chart" heading="Analyze">Visualize various statistics about your products.</tw-feature>
+                    <tw-feature icon="fa-tasks" heading="Compare">Compare your products with competition. See how you're doing!</tw-feature>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+
+@main(name)(content)(List(
+    "https://fonts.googleapis.com/css?family=Montserrat:400,700",
+    "https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic",
+    "https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700",
+    "/assets/stylesheets/lib/agency/agency.min.css",
+    "/assets/stylesheets/index.css"
+))(List(
+    "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js",
+    "/assets/javascripts/app/index/controllers/signIn.js",
+    "/assets/javascripts/app/index/directives/feature/feature.js"
+))

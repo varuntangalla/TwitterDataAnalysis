@@ -1,0 +1,13 @@
+GET        /                     controllers.Application.index
+
+# get request token (as JSON) for twitter signin
+GET        /request_token        controllers.Application.getRequestToken
+
+# callback url for twitter signin
+GET        /signin               controllers.Application.signin(oauth_token: String ?= "", oauth_verifier: String ?= "")
+
+# Sign out
+GET        /signout              controllers.Application.signout
+
+# Static resources
+GET        /assets/*file         controllers.Assets.at(path="/public", file)
